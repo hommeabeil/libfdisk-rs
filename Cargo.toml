@@ -8,7 +8,7 @@ repository = "https://github.com/hommeabeil/libfdisk-rs"
 description = "Rust wrappers for libfdisk"
 
 [dependencies]
-libc = "0.2.65"
+libc = "0.2"
 error-chain = { version = "0.12", default-features = false }
 libfdisk-sys = "0.1"
-nix = "0.16.1"
+nix = "0.21"
