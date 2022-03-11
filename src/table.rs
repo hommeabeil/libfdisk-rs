@@ -4,6 +4,7 @@
 use crate::errors::*;
 use crate::iter::Iter;
 use crate::partition::Partition;
+use crate::Context;
 use libfdisk_sys;
 
 /// Container for fdisk partitions
@@ -121,5 +122,14 @@ impl<'a> IntoIterator for &'a mut Table {
 
     fn into_iter(self) -> Self::IntoIter {
         self.iter()
+    }
+}
+
+impl Context {
+    pub fn apply_table(&self, table: &Table) -> Result<()> {
+        match unsafe { libfdisk_sys::fdisk_apply_table(self.ptr, table.ptr) } {
+            0 => Ok(()),
+            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+        }
     }
 }

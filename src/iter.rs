@@ -26,7 +26,8 @@ impl<'a> Iterator for Iter<'a> {
 
     fn next(&mut self) -> Option<Self::Item> {
         let mut ptr: *mut libfdisk_sys::fdisk_partition = std::ptr::null_mut();
-        match unsafe { libfdisk_sys::fdisk_table_next_partition(self.tbl.ptr, self.ptr, &mut ptr) } {
+        match unsafe { libfdisk_sys::fdisk_table_next_partition(self.tbl.ptr, self.ptr, &mut ptr) }
+        {
             0 => Some(Partition { ptr }),
             1 => None,
             _ => panic!("bad value"),

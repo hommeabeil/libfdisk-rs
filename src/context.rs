@@ -56,8 +56,9 @@ impl Context {
     pub fn assign_device<P: AsRef<Path>>(&self, name: P, readonly: bool) -> Result<()> {
         let device = CString::new(name.as_ref().as_os_str().as_bytes())
             .chain_err(|| format!("converting to CString {}", name.as_ref().display()))?;
-        match unsafe { libfdisk_sys::fdisk_assign_device(self.ptr, device.as_ptr(), readonly as i32) }
-        {
+        match unsafe {
+            libfdisk_sys::fdisk_assign_device(self.ptr, device.as_ptr(), readonly as i32)
+        } {
             0 => Ok(()),
             v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
         }
