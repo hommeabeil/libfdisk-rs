@@ -114,50 +114,32 @@ impl Partition {
 
     /// Return true if the partition has enabled boot flag
     pub fn is_bootable(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_is_bootable(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_is_bootable(self.ptr) == 1 }
     }
 
     /// Return true if the partition is container (e.g. MBR extended partition)
     pub fn is_container(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_is_container(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_is_container(self.ptr) == 1 }
     }
 
     /// Return true if points to freespace
     pub fn is_freespace(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_is_freespace(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_is_freespace(self.ptr) == 1 }
     }
 
     /// Return true if the partition is nested (e.g. MBR logical partition)
     pub fn is_nested(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_is_nested(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_is_nested(self.ptr) == 1 }
     }
 
     /// Return true if the partition points to some area
     pub fn is_used(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_is_used(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_is_used(self.ptr) == 1 }
     }
 
     /// Return true if the partition is special whole-disk (e.g. SUN) partition
     pub fn is_wholedisk(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_is_wholedisk(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_is_wholedisk(self.ptr) == 1 }
     }
 
     pub fn set_partno(&self, partno: usize) -> Result<()> {
@@ -228,10 +210,7 @@ impl Partition {
 
     /// Return true if the partition follows default
     pub fn start_is_default(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_partition_start_is_default(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_partition_start_is_default(self.ptr) == 1 }
     }
 
     /// Sets the partno as undefined.

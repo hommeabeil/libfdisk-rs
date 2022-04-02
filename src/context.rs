@@ -254,34 +254,25 @@ impl Context {
 
     /// Return 'true' if boot bits protection enabled.
     pub fn has_protected_bootbits(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_has_protected_bootbits(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        matches!(
+            unsafe { libfdisk_sys::fdisk_has_protected_bootbits(self.ptr) },
+            1
+        )
     }
 
     /// Return 'true' if details are enabled
     pub fn is_details(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_is_details(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        matches!(unsafe { libfdisk_sys::fdisk_is_details(self.ptr) }, 1)
     }
 
     /// Return 'true' if list-only mode enabled
     pub fn is_listonly(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_is_listonly(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        matches!(unsafe { libfdisk_sys::fdisk_is_listonly(self.ptr) }, 1)
     }
 
     /// Return 'true' if device open readonly
     pub fn is_readonly(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_is_readonly(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        matches!(unsafe { libfdisk_sys::fdisk_is_readonly(self.ptr) }, 1)
     }
 
     /// It's strongly recommended to use the default library setting.

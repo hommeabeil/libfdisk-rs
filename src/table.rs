@@ -72,10 +72,7 @@ impl Table {
 
     /// Return true if the table is without filesystems
     pub fn is_empty(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_table_is_empty(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_table_is_empty(self.ptr) == 1 }
     }
 
     /// Removes the pa from the table and de-increment reference counter of the pa .
@@ -93,10 +90,7 @@ impl Table {
 
     /// Return true if the table is not in disk order
     pub fn is_wrong_order(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_table_wrong_order(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_table_wrong_order(self.ptr) == 1 }
     }
 
     pub fn iter(&mut self) -> Iter {

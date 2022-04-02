@@ -66,10 +66,7 @@ impl Context {
     /// # Arguments
     /// * `id`- FDISK_DISKLABEL_*
     pub fn is_labeltype(&self, id: DiskLabel) -> bool {
-        match unsafe { libfdisk_sys::fdisk_is_labeltype(self.ptr, id as u32) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_is_labeltype(self.ptr, id as u32) == 1 }
     }
 
     /// Creates a new disk label of type name .
@@ -115,9 +112,6 @@ impl Context {
 
     /// Return 'true' if there is label on the device.
     pub fn has_label(&self) -> bool {
-        match unsafe { libfdisk_sys::fdisk_has_label(self.ptr) } {
-            1 => true,
-            _ => false,
-        }
+        unsafe { libfdisk_sys::fdisk_has_label(self.ptr) == 1 }
     }
 }
