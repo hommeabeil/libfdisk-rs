@@ -18,6 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install deps
+      run: apt-get update && apt-get install --yes llvm llvmconfig libfdisk-dev
     - name: Build
       run: cargo build --verbose
     - name: Run tests
