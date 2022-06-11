@@ -11,7 +11,7 @@ description = "Rust wrappers for libfdisk"
 libc = "0.2"
 error-chain = { version = "0.12", default-features = false }
 libfdisk-sys = "0.1"
-nix = "0.21"
+nix = "0.24"
 
 [dev-dependencies]
 tempfile = "3"

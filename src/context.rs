@@ -60,7 +60,7 @@ impl Context {
             libfdisk_sys::fdisk_assign_device(self.ptr, device.as_ptr(), readonly as i32)
         } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -71,7 +71,7 @@ impl Context {
     pub fn deassign_device(&self, nosync: bool) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_deassign_device(self.ptr, nosync as i32) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -81,7 +81,7 @@ impl Context {
     pub fn enable_wipe(&self, enable: bool) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_enable_wipe(self.ptr, enable as i32) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -92,7 +92,7 @@ impl Context {
     pub fn enable_bootbits_protection(&self, enable: bool) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_enable_bootbits_protection(self.ptr, enable as i32) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -103,7 +103,7 @@ impl Context {
     pub fn enable_details(&self, enable: bool) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_enable_details(self.ptr, enable as i32) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -113,7 +113,7 @@ impl Context {
     pub fn enable_listonly(&self, enable: bool) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_enable_listonly(self.ptr, enable as i32) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -216,7 +216,7 @@ impl Context {
         let mut table = Table::new();
         match unsafe { libfdisk_sys::fdisk_get_partitions(self.ptr, &mut table.ptr) } {
             0 => Ok(table),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -313,7 +313,7 @@ impl Context {
     pub fn set_size_unit(&self, unit: DiskUnit) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_set_size_unit(self.ptr, unit as i32) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -328,7 +328,7 @@ impl Context {
         };
         match unsafe { libfdisk_sys::fdisk_set_unit(self.ptr, s.as_ptr()) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -345,7 +345,7 @@ impl Context {
     pub fn save_user_sector_size(&self, phy: u32, log: u32) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_save_user_sector_size(self.ptr, phy, log) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 }

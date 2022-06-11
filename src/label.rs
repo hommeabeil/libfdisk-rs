@@ -75,7 +75,7 @@ impl Context {
         let name = CString::new(name.as_ref().as_bytes())?;
         match unsafe { libfdisk_sys::fdisk_create_disklabel(self.ptr, name.as_ptr()) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -83,7 +83,7 @@ impl Context {
     pub fn write_disklabel(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_write_disklabel(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -91,7 +91,7 @@ impl Context {
     pub fn verify_disklabel(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_verify_disklabel(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 

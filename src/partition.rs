@@ -70,7 +70,7 @@ impl Partition {
         let mut p: usize = 0;
         match unsafe { libfdisk_sys::fdisk_partition_get_parent(self.ptr, &mut p) } {
             0 => Ok(p),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(v)).into()),
+            v => Err(nix::errno::from_i32(v).into()),
         }
     }
 
@@ -145,21 +145,21 @@ impl Partition {
     pub fn set_partno(&self, partno: usize) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_partition_set_partno(self.ptr, partno) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
     pub fn set_size(&self, size: u64) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_partition_set_size(self.ptr, size) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
     pub fn set_start(&self, start: u64) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_partition_set_start(self.ptr, start) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -167,7 +167,7 @@ impl Partition {
         let attrs = CString::new(attrs.as_bytes())?;
         match unsafe { libfdisk_sys::fdisk_partition_set_attrs(self.ptr, attrs.as_ptr()) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -175,7 +175,7 @@ impl Partition {
         let name = CString::new(name.as_bytes())?;
         match unsafe { libfdisk_sys::fdisk_partition_set_name(self.ptr, name.as_ptr()) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -183,7 +183,7 @@ impl Partition {
         let uuid = CString::new(uuid.as_bytes())?;
         match unsafe { libfdisk_sys::fdisk_partition_set_uuid(self.ptr, uuid.as_ptr()) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -194,7 +194,7 @@ impl Partition {
             libfdisk_sys::fdisk_partition_size_explicit(self.ptr, if enable { 1 } else { 0 })
         } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -204,7 +204,7 @@ impl Partition {
             libfdisk_sys::fdisk_partition_start_follow_default(self.ptr, if enable { 1 } else { 0 })
         } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -217,7 +217,7 @@ impl Partition {
     pub fn unset_partno(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_partition_unset_partno(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -225,7 +225,7 @@ impl Partition {
     pub fn unset_size(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_partition_unset_size(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -233,7 +233,7 @@ impl Partition {
     pub fn unset_start(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_partition_unset_start(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 }
@@ -258,7 +258,7 @@ impl Context {
     pub fn set_partition(&self, no: usize, pt: &Partition) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_set_partition(self.ptr, no, pt.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -266,7 +266,7 @@ impl Context {
     pub fn delete_all_partitions(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_delete_all_partitions(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -276,7 +276,7 @@ impl Context {
     pub fn delete_partition(&self, no: usize) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_delete_partition(self.ptr, no) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 }
