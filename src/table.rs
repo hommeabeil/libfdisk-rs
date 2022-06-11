@@ -31,7 +31,7 @@ impl Table {
     pub fn reset_table(&self) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_reset_table(self.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -43,7 +43,7 @@ impl Table {
     pub fn add_partition(&self, pa: &mut Partition) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_table_add_partition(self.ptr, pa.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -84,7 +84,7 @@ impl Table {
     pub fn remove_partition(&self, pa: &mut Partition) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_table_remove_partition(self.ptr, pa.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 
@@ -123,7 +123,7 @@ impl Context {
     pub fn apply_table(&self, table: &Table) -> Result<()> {
         match unsafe { libfdisk_sys::fdisk_apply_table(self.ptr, table.ptr) } {
             0 => Ok(()),
-            v => Err(nix::Error::from_errno(nix::errno::from_i32(-v)).into()),
+            v => Err(nix::errno::from_i32(-v).into()),
         }
     }
 }
